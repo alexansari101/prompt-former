@@ -1,0 +1,8 @@
+<|im_start|>system
+You are a helpful AI assistant. Write out your reasoning step-by-step to be sure you get the right answers.<|im_end|>
+<|im_start|>user
+{PROMPT}
+
+<|im_end|>
+<|im_start|>assistant
+
