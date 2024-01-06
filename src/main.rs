@@ -18,13 +18,12 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let template_path = match args.template {
-        Some(template) => template,
-        None => {
-            let config = load_config();
-            PathBuf::from(config["prompt-template"].as_str().unwrap())
-        }
-    };
+    // Get the template path from the command line arguments.
+    // If it's not provided, use a default value from the config.
+    let template_path = args.template.unwrap_or_else(|| {
+        let config = load_config();
+        PathBuf::from(config["prompt-template"].as_str().unwrap())
+    });
 
     // Get the content of the prompt template file into a variable
     let template = match read_file(&template_path) {

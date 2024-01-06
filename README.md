@@ -1,8 +1,8 @@
 # Prompt-Former
 
-Dead simple llm chating over the command line.
+A dead simple way to chat with your your LLM over the command line.
 
-This is a minimalist program designed to make prompting ollama models easy. It was originally designed to simplify prompting of local llm models over the command line using ollama.
+This is a minimalist Rust program designed to make prompting ollama models easy. It allows you to switch between custom prompt templates for different tasks and to different prompt formats for different models.
 
 For example, Dolphin Mistral uses the ChatML format. An example "Hello World!" prompt might look something like this:
 
@@ -23,6 +23,23 @@ Instead, configure Prompt-Former to use your desired ChatML-formatted template a
 ```
 
 Plenty of libraries, eg, langchain, support prompt templates. This has minimal dependencies, can be run as a standalone app on the command line, and is trivial to extend to new templates.
+
+Give your command line the power of AI:
+
+```bash
+> pf "$(cat notes.md) /n/n Summarize the notes above." -t templates/summarize.txt | dolphin
+
+> pf "$(tree -L 2 project_folder) /n/n Based on this directory structure, can you remind me what this project is about?" | dolphin
+
+> pf "$(dmesg --level=err,warn | tail) /n/n Do you know what this error is about in the output of dmesg? Should I be concerned?" | dolphin
+
+> pf "$(cat main.py) /n/n Create a README.md file for this program." | dolphin > README.md
+```
+
+See also:
+
+- [Ollama](https://ollama.ai/) installation instructions.
+- [Rust](https://www.rust-lang.org/tools/install) installation instructions to install rust + cargo toolchains to build this repo.
 
 ## Getting Started
 
@@ -53,7 +70,7 @@ To use `prompt-former`, follow these steps:
    }
    ```
 
-5. Run the built binary with your desired arguments, replacing `<prompt>` and `<template_path>` with your input:
+5. Run the binary with your desired arguments, replacing `<prompt>` and `<template_path>` with your input:
    ```bash
    pf <prompt>
    pf -t <template_path> <prompt>
@@ -83,9 +100,3 @@ Please make sure to update tests as needed.
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
-
-## TODO
-
-- [ ] Test environment variable configuration to ensure it runs realease binary from anywhere.
-- [ ] Support system prompts.
-- [ ] Support chats with memory.
